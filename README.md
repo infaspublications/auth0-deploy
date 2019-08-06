@@ -12,8 +12,8 @@ Auth0にデプロイする設定やソースコードを管理します
 |AUTH0_SITE_DOMAIN|WWD側のサイトドメインを指定|xxx.wwdjapan.com|
 |AUTH0_CLIENT_ID|deploy用アプリケーションのclient_id|aaaaaaaaaa|
 |AUTH0_CLIENT_SECRET|deploy用アプリケーションのclient_secret|bbbbbbbbbbbb|
-|AUTH0_SMTP_USER|SMTPのユーザ名を指定|xxxxxxx|
-|AUTH0_SMTP_PASS|SMTPのパスワードを指定|yyyyyyy|
+|AUTH0_SMTP_USER|SMTPのユーザ名を指定|xxxxxxxx|
+|AUTH0_SMTP_PASS|SMTPのパスワードを指定|yyyyyyyy|
 |AUTH0_DEFAULT_FROM_ADDRESS|SMTPのデフォルトのfromアドレスを指定|no-reply@example.com|
 
 ## 使い方
