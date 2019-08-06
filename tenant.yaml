@@ -130,7 +130,6 @@ databases:
     enabled_clients:
       - auth0-deploy-cli-extension
       - wwdjapan.com(WordPress)
-      - wwdjapan.com(Laravel)
       - wwdjapan.com(PCI)
       - membership
     is_domain_connection: false
