@@ -1,0 +1,7 @@
+export AUTH0_DOMAIN=xxx-yyyyyyy.auth0.com
+export AUTH0_CLIENT_ID=aaaaaaaaaaaaaaa
+export AUTH0_CLIENT_SECRET=bbbbbbbbbbbbbbbbbbbb
+export AUTH0_SITE_DOMAIN=xxxxx.wwdjapan.com
+export AUTH0_SMTP_USER=xxxxxxxxxxxx
+export AUTH0_SMTP_PASS=xxxxxxxxxxxxxxxxx
+export AUTH0_DEFAULT_FROM_ADDRESS=info@example.com

@@ -1,0 +1,60 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Formatting coding standard by prettier
+          command: npm run fmt
+
+      - run:
+          name: Check coding standard by ESLint
+          command: npm run lint
+
+      - run:
+          name: Run test
+          command: npm run test
+  deploy-prod:
+    docker:
+      - image: circleci/node:8.11
+
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run deploy
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/

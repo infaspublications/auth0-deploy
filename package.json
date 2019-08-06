@@ -1,0 +1,47 @@
+{
+  "name": "auth0-deploy",
+  "version": "1.0.0",
+  "description": "Auth0にデプロイする設定やソースコードを管理します",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node_modules/mocha/bin/_mocha 'tests/**/*.js'",
+    "fmt": "eslint . --fix --cache",
+    "precommit": "lint-staged",
+    "deploy": "node scripts/deploy.js"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint . --fix --cache",
+      "git add"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "auth0": "^2.17.0",
+    "auth0-deploy-cli": "^3.4.0",
+    "bcrypt": "^3.0.6",
+    "chai": "^4.2.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
+    "mocha": "^6.2.0",
+    "mysql": "^2.17.1",
+    "prettier": "^1.18.2",
+    "proxyquire": "^2.1.1",
+    "sinon": "^7.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infaspublications/auth0-deploy.git"
+  },
+  "author": "horike37",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/infaspublications/auth0-deploy/issues"
+  },
+  "homepage": "https://github.com/infaspublications/auth0-deploy#readme"
+}

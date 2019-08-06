@@ -1,0 +1,239 @@
+tenant:
+  enabled_locales:
+    - ja
+  flags:
+    universal_login: true
+    new_universal_login_experience_enabled: true
+    disable_clickjack_protection_headers: false
+  picture_url: >-
+    https://www.wwdjapan.com/wp-content/themes/wwdj-pc/assets/images/site-logo-black.png
+  universal_login:
+    colors:
+      primary: '#000000'
+      page_background: '#e1e1e1'
+rules:
+  - name: add default role when initial signup
+    script: ./rules/add-default-role-when-initial-signup.js
+    stage: login_success
+    enabled: true
+    order: 2
+  - name: add usermeta to profile
+    script: ./rules/add-usermeta-to-profile.js
+    stage: login_success
+    enabled: true
+    order: 1
+pages:
+  - name: login
+    enabled: true
+    html: ./pages/login.html
+  - name: password_reset
+    enabled: true
+    html: ./pages/password_reset.html
+resourceServers: []
+clients:
+  - name: auth0-deploy-cli-extension
+    cross_origin_auth: false
+    custom_login_page_on: true
+    grant_types:
+      - authorization_code
+      - implicit
+      - refresh_token
+      - client_credentials
+    is_first_party: true
+    is_token_endpoint_ip_header_trusted: false
+    jwt_configuration:
+      alg: RS256
+      lifetime_in_seconds: 36000
+      secret_encoded: false
+    oidc_conformant: true
+    sso_disabled: false
+  - name: membership
+    app_type: non_interactive
+    cross_origin_auth: false
+    custom_login_page_on: true
+    grant_types:
+      - authorization_code
+      - implicit
+      - refresh_token
+      - client_credentials
+    is_first_party: true
+    is_token_endpoint_ip_header_trusted: false
+    jwt_configuration:
+      alg: RS256
+      lifetime_in_seconds: 36000
+      secret_encoded: false
+    oidc_conformant: true
+    sso_disabled: false
+  - name: wwdjapan.com(PCI)
+    allowed_clients: []
+    allowed_logout_urls:
+      - 'http://localhost:3000'
+      - 'https://##AUTH0_SITE_DOMAIN##'
+    allowed_origins:
+      - 'https://##AUTH0_SITE_DOMAIN##'
+    app_type: spa
+    callbacks:
+      - 'http://localhost:3000'
+      - 'http://localhost:3000/callback'
+      - 'https://##AUTH0_SITE_DOMAIN##'
+    client_aliases: []
+    cross_origin_auth: false
+    custom_login_page_on: true
+    grant_types:
+      - authorization_code
+      - implicit
+      - refresh_token
+    is_first_party: true
+    is_token_endpoint_ip_header_trusted: false
+    jwt_configuration:
+      alg: RS256
+      lifetime_in_seconds: 36000
+      secret_encoded: false
+    oidc_conformant: true
+    sso_disabled: false
+    token_endpoint_auth_method: none
+    web_origins:
+      - 'http://localhost:3000'
+      - 'https://##AUTH0_SITE_DOMAIN##'
+  - name: wwdjapan.com(WordPress)
+    allowed_clients: []
+    allowed_logout_urls:
+      - 'https://##AUTH0_SITE_DOMAIN##'
+      - 'https://##AUTH0_SITE_DOMAIN##/wp-login.php?skip_sso'
+    allowed_origins:
+      - 'https://##AUTH0_SITE_DOMAIN##'
+    app_type: regular_web
+    callbacks:
+      - 'https://##AUTH0_SITE_DOMAIN##/index.php?auth0=1'
+    client_aliases: []
+    cross_origin_auth: false
+    custom_login_page_on: true
+    grant_types:
+      - authorization_code
+      - implicit
+      - refresh_token
+      - client_credentials
+    is_first_party: true
+    is_token_endpoint_ip_header_trusted: false
+    jwt_configuration:
+      alg: RS256
+      lifetime_in_seconds: 36000
+      secret_encoded: false
+    oidc_conformant: true
+    sso_disabled: false
+    token_endpoint_auth_method: client_secret_post
+    web_origins:
+      - 'https://##AUTH0_SITE_DOMAIN##'
+databases:
+  - name: Username-Password-Authentication
+    strategy: auth0
+    enabled_clients:
+      - auth0-deploy-cli-extension
+      - wwdjapan.com(WordPress)
+      - wwdjapan.com(Laravel)
+      - wwdjapan.com(PCI)
+      - membership
+    is_domain_connection: false
+    options:
+      mfa:
+        active: true
+        return_enroll_settings: true
+      passwordPolicy: good
+      strategy_version: 2
+      brute_force_protection: true
+      customScripts:
+        login: ./databases/Username-Password-Authentication/login.js
+        get_user: ./databases/Username-Password-Authentication/get_user.js
+      enabledDatabaseCustomization: true
+      import_mode: true
+      password_no_personal_info:
+        enable: false
+      password_dictionary:
+        enable: false
+        dictionary: []
+      password_history:
+        enable: false
+        size: 5
+      password_complexity_options:
+        min_length: 8
+    realms:
+      - Username-Password-Authentication
+connections: []
+rulesConfigs: []
+emailProvider:
+  name: smtp
+  credentials:
+    smtp_host: email-smtp.us-east-1.amazonaws.com
+    smtp_port: 587
+    smtp_user: ##AUTH0_SMTP_USER##
+    smtp_pass: ##AUTH0_SMTP_PASS##
+  default_from_address: ##AUTH0_DEFAULT_FROM_ADDRESS##
+  enabled: true
+emailTemplates:
+  - template: reset_email
+    body: ./emailTemplates/reset_email.html
+    enabled: true
+    from: ##AUTH0_DEFAULT_FROM_ADDRESS##
+    resultUrl: 'https://##AUTH0_SITE_DOMAIN##'
+    subject: パスワード再発行（お手続きは完了していません）
+    syntax: liquid
+    urlLifetimeInSeconds: 432000
+  - template: verify_email
+    body: ./emailTemplates/verify_email.html
+    enabled: true
+    from: ''
+    resultUrl: >-
+      https://##AUTH0_SITE_DOMAIN##/wp-login.php?redirect_to=https://##AUTH0_SITE_DOMAIN##/account/registration/input
+    subject: WWD JAPAN.com　メールアドレス確認メール（お手続きは完了していません）
+    syntax: liquid
+    urlLifetimeInSeconds: 432000
+clientGrants:
+  - client_id: membership
+    audience: 'https://##AUTH0_DOMAIN##/api/v2/'
+    scope:
+      - 'read:users'
+      - 'update:users'
+      - 'delete:users'
+      - 'create:users'
+      - 'read:users_app_metadata'
+      - 'update:users_app_metadata'
+      - 'delete:users_app_metadata'
+      - 'create:users_app_metadata'
+      - 'create:user_tickets'
+      - 'read:user_idp_tokens'
+  - client_id: wwdjapan.com(WordPress)
+    audience: 'https://##AUTH0_DOMAIN##/api/v2/'
+    scope:
+      - 'read:client_grants'
+      - 'create:client_grants'
+      - 'delete:client_grants'
+      - 'update:client_grants'
+      - 'read:users'
+      - 'update:users'
+      - 'delete:users'
+      - 'create:users'
+      - 'read:users_app_metadata'
+      - 'update:users_app_metadata'
+      - 'delete:users_app_metadata'
+      - 'create:users_app_metadata'
+      - 'create:user_tickets'
+guardianFactors:
+  - name: duo
+    enabled: false
+  - name: email
+    enabled: false
+  - name: otp
+    enabled: false
+  - name: push-notification
+    enabled: false
+  - name: sms
+    enabled: false
+guardianFactorProviders: []
+guardianFactorTemplates: []
+roles:
+  - name: editor
+    description: WordPress上の編集者
+    permissions: []
+  - name: subscriber
+    description: 一般会員
+    permissions: []
