@@ -13,9 +13,7 @@ describe('#login', () => {
       DB_PASSWORD: '<DB_PASSWORD>',
       DB_DATABASE: '<DB_DATABASE>'
     }
-    global.WrongUsernameOrPasswordError = function() {
-      this.error = 'error'
-    }
+    global.WrongUsernameOrPasswordError = function() {}
   })
 
   it('should expose login info if login succeed', async () => {
@@ -91,7 +89,7 @@ describe('#login', () => {
       bcrypt: proxybcrypt
     })
     login('test', 'password', (data) => {
-      expect(data.error).to.be.equal('error')
+      expect(data).to.be.an.instanceof(global.WrongUsernameOrPasswordError)
     })
   })
 
@@ -118,7 +116,7 @@ describe('#login', () => {
       bcrypt: proxybcrypt
     })
     login('test', 'password', (data) => {
-      expect(data.error).to.be.equal('error')
+      expect(data).to.be.an.instanceof(global.WrongUsernameOrPasswordError)
     })
   })
 
