@@ -67,14 +67,11 @@ clients:
   - name: wwdjapan.com(PCI)
     allowed_clients: []
     allowed_logout_urls:
-      - 'http://localhost:3000'
       - 'https://##AUTH0_SITE_DOMAIN##'
     allowed_origins:
       - 'https://##AUTH0_SITE_DOMAIN##'
     app_type: spa
     callbacks:
-      - 'http://localhost:3000'
-      - 'http://localhost:3000/callback'
       - 'https://##AUTH0_SITE_DOMAIN##'
     client_aliases: []
     cross_origin_auth: false
