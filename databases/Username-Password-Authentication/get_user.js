@@ -27,5 +27,3 @@ function getByEmail(email, callback) {
     })
   })
 }
-
-module.exports = getByEmail

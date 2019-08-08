@@ -35,5 +35,3 @@ function login(email, password, callback) {
     })
   })
 }
-
-module.exports = login
