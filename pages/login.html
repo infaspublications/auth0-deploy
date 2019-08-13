@@ -28,7 +28,7 @@
     var language;
 
     if (config.dict && config.dict.signin && config.dict.signin.title) {
-      languageDictionary = { title: config.dict.signin.title };
+      languageDictionary = { title: '' };
     } else if (typeof config.dict === 'string') {
       language = config.dict;
     }
