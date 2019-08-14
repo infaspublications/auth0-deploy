@@ -173,7 +173,7 @@ emailTemplates:
     resultUrl: 'https://##AUTH0_SITE_DOMAIN##'
     subject: パスワード再発行（お手続きは完了していません）
     syntax: liquid
-    urlLifetimeInSeconds: 432000
+    urlLifetimeInSeconds: 86400
   - template: verify_email
     body: ./emailTemplates/verify_email.html
     enabled: true
@@ -182,7 +182,7 @@ emailTemplates:
       https://##AUTH0_SITE_DOMAIN##/wp-login.php?redirect_to=https://##AUTH0_SITE_DOMAIN##/account/registration/input
     subject: WWD JAPAN.com　メールアドレス確認メール（お手続きは完了していません）
     syntax: liquid
-    urlLifetimeInSeconds: 432000
+    urlLifetimeInSeconds: 86400
 clientGrants:
   - client_id: membership
     audience: 'https://##AUTH0_DOMAIN##/api/v2/'
