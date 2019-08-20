@@ -5,6 +5,7 @@ tenant:
     universal_login: true
     new_universal_login_experience_enabled: true
     disable_clickjack_protection_headers: false
+    enable_public_signup_user_exists_error: true
   picture_url: >-
     https://www.wwdjapan.com/wp-content/themes/wwdj-pc/assets/images/site-logo-black.png
   universal_login:
