@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/infaspublications/auth0-deploy.svg?style=svg&circle-token=e972049af853ac9a4890233a9d52660d00f93d5f)](https://circleci.com/gh/infaspublications/auth0-deploy)
+[![CircleCI](https://circleci.com/gh/infaspublications/auth0-deploy.svg?style=svg&circle-token=e972049af853ac9a4890233a9d52660d00f93d5f)](https://circleci.com/gh/infaspublications/auth0-deploy) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 
 ## Auth0 deploy
 Auth0にデプロイする設定やソースコードを管理します
