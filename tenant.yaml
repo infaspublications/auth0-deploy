@@ -2,6 +2,7 @@ tenant:
   enabled_locales:
     - ja
   flags:
+    enable_custom_domain_in_emails: true
     universal_login: true
     new_universal_login_experience_enabled: true
     disable_clickjack_protection_headers: false
