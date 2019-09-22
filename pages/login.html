@@ -43,12 +43,11 @@
           (config.callbackOnLocationHash ? 'token' : 'code'),
         params: config.internalOptions
       },
-      /* additional configuration needed for custom domains
       configurationBaseUrl: config.clientConfigurationBaseUrl,
       overrides: {
         __tenant: config.auth0Tenant,
         __token_issuer: 'YOUR_CUSTOM_DOMAIN'
-      }, */
+      },
       assetsUrl:  config.assetsUrl,
       allowedConnections: connection ? [connection] : null,
       rememberLastLogin: !prompt,
