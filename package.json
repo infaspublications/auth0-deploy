@@ -18,7 +18,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "auth0": "^2.17.0",
+    "auth0": "^2.27.1",
     "auth0-deploy-cli": "^3.4.0",
     "bcrypt": "^3.0.6",
     "chai": "^4.2.0",
